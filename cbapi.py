@@ -1,5 +1,9 @@
 from flask import Flask, request
 from llama_cpp import Llama
+import os
+
+ACCESS_TOKEN = os.environ["ACCESS_TOKEN"]
+
 
 # Model inference
 
@@ -25,6 +29,9 @@ app = Flask(__name__)
 
 @app.get("/detect")
 def detect():
+    if "t" not in request.args or request.args.get("t") != ACCESS_TOKEN:
+        return "Invalid access token t", 401
+
     if "q" not in request.args:
         return "Query q is required", 400
     

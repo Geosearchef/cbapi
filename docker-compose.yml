@@ -4,4 +4,6 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - "./models:/models"
+      - "./models:/src/models"
+    environment:
+      - ACCESS_TOKEN=apple
